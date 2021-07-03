@@ -1,5 +1,6 @@
-require './mastermind.rb'
+require_relative 'game_rules'
 # frozen_string_literal: true
+
 
 # Logic for player to break the code
 class CodeBreaker
@@ -45,7 +46,7 @@ class CodeBreaker
     when 'colors'
       puts 'The colors you have to choose from are: red blue green yellow orange pink'
     when 'rules'
-      rules.explain_rules
+      @rules.codebreaker_rules
     else
       check_for_win(@user_input)
       display_feedback(@secret_code, @user_input.split)
@@ -89,3 +90,4 @@ class CodeBreaker
   end
   # End of Class
 end
+
