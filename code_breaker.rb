@@ -1,7 +1,6 @@
 require_relative 'game_rules'
 # frozen_string_literal: true
 
-
 # Logic for player to break the code
 class CodeBreaker
   def initialize
@@ -90,4 +89,3 @@ class CodeBreaker
   end
   # End of Class
 end
-

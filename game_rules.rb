@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 # Holds all Game rules
 class GameRules
   def initialize; end
 
   def basic_rules
     puts 'Welcome to Mastermind. A simple code breaking game. You can choose if you want to be the codebreaker or
-    if you want to be the codemaker. The codebreaker tries to break a random code the computer makes. The code maker tries to make
-    a code that the computer cannot break. Would you like to be the codebreaker or codemaker?' 
+    if you want to be the codemaker. The codebreaker tries to break a random code the computer makes.
+    The code maker tries to make a code that the computer cannot break.
+    Would you like to be the codebreaker or codemaker?'
   end
 
   def codebreaker_rules
@@ -20,18 +23,44 @@ class GameRules
   end
 
   def codemaker_rules
-    puts "Welcome code maker. The rules are simple. Simply make a four color code and see if the computer can crack it or not.
+    puts "Welcome code maker. The rules are simple. Simply make a four color code
+    See if the computer can crack it or not.
     The computer will have twelve guesses to crack your code. If it can't you win.
-    The colors you have to choose from are: red blue green yellow orange pink : duplicates are allowed. See if you can stump the computer!"
+    The colors you have to choose from are: red blue green yellow orange pink : duplicates are allowed.
+    See if you can stump the computer!"
   end
 end
 
 # Used to create a code for game
 class SecretCode
-  attr_reader :code
+  attr_reader :code, :color_choices
 
   def initialize
     @color_choices = %w[red blue green yellow orange pink]
     @code = Array.new(4) { @color_choices.sample }
+    @code_valid = false
+  end
+
+  def human_made_code
+    until @code_valid
+      puts 'Please enter your secret code of four colors seperated by a single space: '
+      @human_code = gets.chomp
+      check_code(@human_code)
+    end
+
+    return @human_code if @code_valid
+  end
+
+  def check_code(code)
+    puts 'Please enter correct amount of colors' if code.split.length != 4
+
+    code.split.each do |word|
+      if !@color_choices.include? word
+        puts 'Please enter the proper amount of colors and valid colors!'
+        break
+      else
+        @code_valid = true
+      end
+    end
   end
 end
